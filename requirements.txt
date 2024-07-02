@@ -1,4 +1,6 @@
 numpy
 pandas
 matplotlib
+streamlit
+
 https://github.com/kenta-sekiguchi/vitanavi_app/releases/download/v1.0.0/vitanaviclient-1.0.13-py3-none-any.whl
