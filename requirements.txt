@@ -1,4 +1,4 @@
 numpy == 1.22.1
 pandas == 2.0.3
 matplotlib == 3.7.1
-vitanaviclient == 1.0.13
+.\vitanaviclient-1.0.13-py3-none-any.whl
