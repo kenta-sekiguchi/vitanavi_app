@@ -1,4 +1,4 @@
-numpy == 1.22.1
-pandas == 2.0.3
-matplotlib == 3.7.1
+numpy
+pandas
+matplotlib
 https://github.com/kenta-sekiguchi/vitanavi_app/releases/download/v1.0.0/vitanaviclient-1.0.13-py3-none-any.whl
