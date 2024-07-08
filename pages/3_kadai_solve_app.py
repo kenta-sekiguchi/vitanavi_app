@@ -210,6 +210,7 @@ if st.button('実行'):
     # ユーザと同属性の人の病気にかかる回数
     # ユーザの健康習慣を推定するのに使用
     input_sick = average_response_data.get_vector_as_dataframe()[sick_id]
+    st.dataframe(input_sick)
     input_sick_dict = input_sick.to_dict(orient='records')[0]
 
     # ユーザの入力とマージ
