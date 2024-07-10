@@ -102,14 +102,13 @@ if option == 'タバコを吸いたい':
 # 飲酒量 (AAAED)
 elif option == 'お酒を飲みたい':
     amount_alc = st.selectbox('1日当たりのお酒を飲む量', [label['label'] for label in vita_navi_attribute_def_map['AAAED']['selectOptions']])
-    st.markdown("""
-    **【1合の目安】**
+    st.info("""
+    **【1合の目安】**\n
+    ・ビール中瓶1本(約500ml)\n
+    ・焼酎35度(80ml)\n
+    ・ワイン2杯(240ml))\n
+    ・ウイスキーダブル一杯(60ml)
             """)
-    
-    st.text('ビール中瓶1本(約500ml)')
-    st.text('焼酎35度(80ml)')
-    st.text('ワイン2杯(240ml))')
-    st.text('ウイスキーダブル一杯(60ml)')
 
     alc_label = function.get_value_from_label(amount_alc, vita_navi_attribute_def_map["AAAED"]['selectOptions'])
     user_input_vector[function.id2name('AAAED')] = alc_label
@@ -149,13 +148,15 @@ elif option == '塩分は気にしたくない':
 # 炭水化物（AABOS）
 elif option == '糖質制限はしたくない':
     carb_amount = st.number_input('1日当たりの炭水化物摂取量は？(g)', step=1)
-    st.markdown("""
-    **【炭水化物量の目安】**
-            """)
+
+    st.info("""
+                        
+        **【炭水化物量の目安】**\n
+        ・お茶碗1杯のご飯(160g)の炭水化物量：約60g\n
+        ・食パン1枚あたり(6枚切り)の炭水化物量：約30g\n
+        ・パスタスタ1人前(乾麺90g)あたりの炭水化物量：約66g
+                    """)
     
-    st.text('お茶碗1杯のご飯(160g)の炭水化物量：約60g')
-    st.text('食パン1枚あたり(6枚切り)の炭水化物量：約30g')
-    st.text('パスタ1人前(乾麺90g)あたりの炭水化物量：約66g')
     user_input_vector[function.id2name('AABOS')] = carb_amount
     choose_id_list.remove('AABOS')
 
@@ -263,7 +264,13 @@ if st.button('実行'):
             label = function.get_label_from_value(user_df[id].iloc[0], vita_navi_attribute_def_map["AAAED"]['selectOptions'])
             st.markdown('**【飲んでよいお酒の上限】**')
             st.write(f'{label}')
-            st.text('1合の目安：1合(180ml)の目安:ビール中瓶1本(約500ml)、焼酎35度(80ml)、ウイスキーダブル一杯(60ml)、ワイン2杯(240ml)')
+            st.info("""
+                    **【1合の目安】**\n
+                    ・ビール中瓶1本(約500ml)\n
+                    ・焼酎35度(80ml)\n
+                    ・ワイン2杯(240ml))\n
+                    ・ウイスキーダブル一杯(60ml)
+                            """)
 
         # 運動
         elif id == 'AAAID':
@@ -289,20 +296,19 @@ if st.button('実行'):
         elif id == 'AABQE':
             st.markdown('**【塩分摂取量】**')
             st.write(f'{user_df[id].iloc[0]:.1f} g')
-            st.text('※日本人の平均塩分摂取量は約10gです')
+            st.warning('※日本人の平均塩分摂取量は約10gです')
 
         # 炭水化物量
         elif id == 'AABOS':
             st.markdown('**【炭水化物摂取量】**')
             st.write(f'炭水化物摂取量：{user_df[id].iloc[0]:.1f} g')
 
-            st.markdown("""
-            【炭水化物量の目安】
-                    """)
-            
-            st.text('お茶碗1杯のご飯(160g)の炭水化物量：約60g')
-            st.text('食パン1枚あたり(6枚切り)の炭水化物量：約30g')
-            st.text('パスタ1人前(乾麺90g)あたりの炭水化物量：約66g')
+            st.info("""         
+            **【炭水化物量の目安】**\n
+            ・お茶碗1杯のご飯(160g)の炭水化物量：約60g\n
+            ・食パン1枚あたり(6枚切り)の炭水化物量：約30g\n
+            ・パスタスタ1人前(乾麺90g)あたりの炭水化物量：約66g
+                        """)
 
 
         elif id == 'AACPO':
