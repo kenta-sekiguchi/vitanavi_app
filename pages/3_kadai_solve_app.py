@@ -69,29 +69,48 @@ user_input_vector = {
                 '性別' : sex, 
                 '年齢' : age, 
                 '身長' : height, 
-                # '体重':weight,
+                '体重':weight,
                 function.id2name('AABAK'):nervous_label, 
                 function.id2name('AABAF'):morning_label
                 }
 
+if st.checkbox('喫煙者である'):
 
-#----------------------------
-# 譲れない条件
-# ----------------------------
-st.markdown("""
-### あなたが譲れない条件を入力して下さい
-            """)
+    #----------------------------
+    # 譲れない条件
+    # ----------------------------
+    st.markdown("""
+    ### あなたが譲れない条件を入力して下さい
+                """)
 
-choose_id_list = ['AADMJ', 'AAAED', 'AAAID', 'AAEDQ', 'AAAEP', 'AABQE', 'AABOS']
-other_id_list = ['AACPO']
+    choose_id_list = ['AADMJ', 'AAAED', 'AAAID', 'AAEDQ', 'AAAEP', 'AABQE', 'AABOS']
+    other_id_list = ['AACPO']
 
-# 睡眠は入れるべきかな
-# 体重入れても面白い？
-option = st.selectbox(
-                'あなたが通したいわがままは？',
-                ['タバコを吸いたい', 'お酒を飲みたい', '運動はしたくない', 'カフェインとりたい', 
-                 '夜食をしたい', '塩分は気にしたくない', '糖質制限はしたくない', '特になし']
-                )
+    # 睡眠は入れるべきかな
+    # 体重入れても面白い？
+    option = st.selectbox(
+                    'あなたが通したいわがままは？',
+                    ['タバコを吸いたい', 'お酒を飲みたい', '運動はしたくない', 'カフェインとりたい', 
+                    '夜食をしたい', '塩分は気にしたくない', '糖質制限はしたくない', '特になし']
+                    )
+else:
+    #----------------------------
+    # 譲れない条件
+    # ----------------------------
+    st.markdown("""
+    ### あなたが譲れない条件を入力して下さい
+                """)
+
+    choose_id_list = ['AAAED', 'AAAID', 'AAEDQ', 'AAAEP', 'AABQE', 'AABOS']
+    other_id_list = ['AACPO']
+
+    # 睡眠は入れるべきかな
+    # 体重入れても面白い？
+    option = st.selectbox(
+                    'あなたが通したいわがままは？',
+                    ['お酒を飲みたい', '運動はしたくない', 'カフェインとりたい', 
+                    '夜食をしたい', '塩分は気にしたくない', '糖質制限はしたくない', '特になし']
+                    )    
 
 # 歯科衛生質問票_喫煙_1日あたり●本 (AADMJ)
 if option == 'タバコを吸いたい':
@@ -255,7 +274,7 @@ if st.button('実行'):
 
     for id in all_id_list:
         # タバコ
-        if id == 'AADMJ':
+        if id == 'AADMJ' and st.checkbox('喫煙者である'):
             st.markdown('**【吸ってよいたばこの上限】**')
             st.write(f'{int(user_df[id].iloc[0])} 本')
         
