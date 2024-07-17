@@ -188,17 +188,17 @@ choose_name_list = [function.id2name(id) for id in choose_id_list]
 # 任意の選択
 # ----------------------------
 
-st.markdown("""
-### あてはまるものを選択してください
-            """)
+# st.markdown("""
+# ### あてはまるものを選択してください
+#             """)
 
-# 頭痛->AACVX
-if st.checkbox('頭痛持ち'):
-    average_input_vector[function.id2name('AACVX')] = 2
+# # 頭痛->AACVX
+# if st.checkbox('頭痛持ち'):
+#     average_input_vector[function.id2name('AACVX')] = 2
 
-# 腰痛 -> AACWF
-if st.checkbox('腰痛持ち'):
-    average_input_vector[function.id2name('AACWF')] = 2
+# # 腰痛 -> AACWF
+# if st.checkbox('腰痛持ち'):
+#     average_input_vector[function.id2name('AACWF')] = 2
 
 
 
