@@ -274,7 +274,8 @@ if st.button('実行'):
 
     for id in all_id_list:
         # タバコ
-        if id == 'AADMJ' and st.checkbox('喫煙者である'):
+        # if id == 'AADMJ' and st.checkbox('喫煙者である'):
+        if id == 'AADMJ':
             st.markdown('**【吸ってよいたばこの上限】**')
             st.write(f'{int(user_df[id].iloc[0])} 本')
         
