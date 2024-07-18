@@ -83,15 +83,13 @@ if st.checkbox('喫煙者である'):
     ### あなたが譲れない条件を入力して下さい
                 """)
 
-    choose_id_list = ['AADMJ', 'AAAED', 'AAAID', 'AAEDQ', 'AAAEP', 'AABQE', 'AABOS']
+    choose_id_list = ['AADMJ', 'AAAID', 'AAAED', 'AAEDQ', 'AABQE', 'AABOS', 'AAAER', 'AAAEP']
     other_id_list = ['AACPO']
 
-    # 睡眠は入れるべきかな
-    # 体重入れても面白い？
     option = st.selectbox(
                     'あなたが通したいわがままは？',
-                    ['タバコを吸いたい', 'お酒を飲みたい', '運動はしたくない', 'カフェインとりたい', 
-                    '夜食をしたい', '塩分は気にしたくない', '糖質制限はしたくない', '特になし']
+                    ['タバコを吸いたい', '運動はしたくない', 'お酒を飲みたい', 'カフェインとりたい', 
+                    '塩分は気にしたくない', '糖質制限はしたくない', '朝食は食べない', '夜食をしたい', '特になし']
                     )
 else:
     #----------------------------
@@ -101,15 +99,15 @@ else:
     ### あなたが譲れない条件を入力して下さい
                 """)
 
-    choose_id_list = ['AAAED', 'AAAID', 'AAEDQ', 'AAAEP', 'AABQE', 'AABOS']
+    choose_id_list = ['AAAID', 'AAAED', 'AAEDQ', 'AABQE', 'AABOS', 'AAAER', 'AAAEP']
     other_id_list = ['AACPO']
 
     # 睡眠は入れるべきかな
     # 体重入れても面白い？
     option = st.selectbox(
                     'あなたが通したいわがままは？',
-                    ['お酒を飲みたい', '運動はしたくない', 'カフェインとりたい', 
-                    '夜食をしたい', '塩分は気にしたくない', '糖質制限はしたくない', '特になし']
+                    ['運動はしたくない', 'お酒を飲みたい', 'カフェインとりたい','塩分は気にしたくない', 
+                     '糖質制限はしたくない', '朝食は食べない', '夜食をしたい', '特になし']
                     )    
 
 # 歯科衛生質問票_喫煙_1日あたり●本 (AADMJ)
@@ -117,6 +115,12 @@ if option == 'タバコを吸いたい':
     num_smoke = st.number_input('1日当たりに吸う本数は？', step=1)
     user_input_vector[function.id2name('AADMJ')] = num_smoke
     choose_id_list.remove('AADMJ')
+
+# 平均歩数 (AAAID)
+elif option == '運動はしたくない':
+    exc = st.number_input('1日当たりの歩数は？(歩)', step=1)
+    user_input_vector[function.id2name('AAAID')] = exc
+    choose_id_list.remove('AAAID')
 
 # 飲酒量 (AAAED)
 elif option == 'お酒を飲みたい':
@@ -133,11 +137,6 @@ elif option == 'お酒を飲みたい':
     user_input_vector[function.id2name('AAAED')] = alc_label
     choose_id_list.remove('AAAED')
 
-# 平均歩数 (AAAID)
-elif option == '運動はしたくない':
-    exc = st.number_input('1日当たりの歩数は？(歩)', step=1)
-    user_input_vector[function.id2name('AAAID')] = exc
-    choose_id_list.remove('AAAID')
 
 # コーヒーポリフェノール (AAEDQ)
 # なんかおかしい気がする
@@ -146,17 +145,6 @@ elif option == 'カフェインとりたい':
     pol = coffee * 2
     user_input_vector[function.id2name('AAEDQ')] = pol
     choose_id_list.remove('AAEDQ')
-
-# 食べ方3(夜食/間食) (AAAEP)
-elif option == '夜食をしたい':
-    yashoku = st.number_input('週に何回夜食をしますか？(回)', step=1)
-
-    if yashoku >= 3:
-        user_input_vector[function.id2name('AAAEP')] = 1
-    else:
-        user_input_vector[function.id2name('AAAEP')] = 2
-
-    choose_id_list.remove('AAAEP')
 
 # 塩分（AABQE）
 elif option == '塩分は気にしたくない':
@@ -179,27 +167,27 @@ elif option == '糖質制限はしたくない':
     user_input_vector[function.id2name('AABOS')] = carb_amount
     choose_id_list.remove('AABOS')
 
+# 食習慣（AAAER）
+elif option == '朝食は食べない':
+    user_input_vector[function.id2name('AAAER')] = 1
+
+    choose_id_list.remove('AAAER')
+
+# 食べ方3(夜食/間食) (AAAEP)
+elif option == '夜食をしたい':
+    yashoku = st.number_input('週に何回夜食をしますか？(回)', step=1)
+
+    if yashoku >= 3:
+        user_input_vector[function.id2name('AAAEP')] = 1
+    else:
+        user_input_vector[function.id2name('AAAEP')] = 2
+
+    choose_id_list.remove('AAAEP')
+
 elif option == '特になし':
     pass
 
 choose_name_list = [function.id2name(id) for id in choose_id_list]
-
-#----------------------------
-# 任意の選択
-# ----------------------------
-
-# st.markdown("""
-# ### あてはまるものを選択してください
-#             """)
-
-# # 頭痛->AACVX
-# if st.checkbox('頭痛持ち'):
-#     average_input_vector[function.id2name('AACVX')] = 2
-
-# # 腰痛 -> AACWF
-# if st.checkbox('腰痛持ち'):
-#     average_input_vector[function.id2name('AACWF')] = 2
-
 
 
 #----------------------------
@@ -330,6 +318,9 @@ if st.button('実行'):
             ・パスタスタ1人前(乾麺90g)あたりの炭水化物量：約66g
                         """)
 
+        elif id == 'AAAER':
+            st.markdown('**【朝食】**')
+            st.write('朝食は週5回以上食べましょう')
 
         elif id == 'AACPO':
             st.markdown('**【推奨睡眠時間（最低）】**')
